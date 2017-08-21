@@ -17,12 +17,13 @@
         <link rel="stylesheet" href="/css/jqcloud/jqcloud.min.css">
 
         <script>
-            $(function(){
-                $('#corpo').jQCloud([
-                    @foreach(App\Palavra::all() as $cada)
-                    {text:"{{$cada->palavra}}", weight: {{$cada->relevancia}}, link: "{{action('PalavraController@traduzir', ['palavra'=>$cada->palavra])}}"},
-                    @endforeach
-]);
+            $(document).ready(function(){
+                $.ajax({
+                    url: '/api/nuvem',
+                    success: function(data){
+                        $('#corpo').jQCloud(JSON.parse(data));
+                    }
+                })
             });
         </script>
     </head>

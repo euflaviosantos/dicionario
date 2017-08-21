@@ -30,4 +30,8 @@ class PalavraController extends Controller
             return redirect('/');
         }
     }
+
+    public function all(){
+        return Palavra::all()->toJson();
+    }
 }
